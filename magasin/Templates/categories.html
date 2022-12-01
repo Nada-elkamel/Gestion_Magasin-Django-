@@ -1,0 +1,35 @@
+<html>
+{% load static %}
+<head>
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+   <!--Navbar-->
+   
+  {% include "navBar.html" %}
+  
+  <!--Fin Navbar-->
+
+<h1>Liste des catégories</h1>
+            <table class="table table-striped">
+               <thead>
+                  <tr>
+                     <th>ID</th>
+                     <th>Nom Categorie</th>
+                     <th>Description</th>
+                     <th>Supprimer</th>
+                  </tr>
+               </thead>
+               <tbody>
+                {% for c in cat reversed %}
+                <tr>
+                   <th>{{ c.id }}</th>
+                   <th>{{ c.nomCat }}</th>
+                   <th>{{ c.description }}</th>
+                   <th><a href="del_categ/{{c.id}}"><img height="32" width="32" src="{% static 'img/delete.jfif' %}"></a></th>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+            </body>

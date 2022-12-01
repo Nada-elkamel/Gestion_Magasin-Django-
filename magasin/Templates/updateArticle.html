@@ -1,0 +1,50 @@
+{% load static %}
+<html>
+<head>
+    <title>Modification d'un article</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+</head>
+
+<body>
+    {% include "navBar.html" %}
+    <h1>
+        <center>Modifier un article</center>
+    </h1>
+    <form action="update_art_action/{{ art.id }}" method="post">
+        {% csrf_token %}
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Libellé</label>
+            <input name="libelle" value="{{ art.libelle }}" class="formcontrol"></td>
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Prix </label>
+            <input name="prix" value="{{ art.prix |floatformat:3 }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Quantité </label>
+            <input type="number" name="qte" value="{{ art.qte }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Date d’ajout </label>
+            <input readonly name="dateAjout" value="{{ art.dateAjout | date:"j/M/Y" }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>Catégorie </label>
+            <select name="categ" class="form-control form-control-lg">
+                {% for c in cat %}
+                {% if c.id == art.categ_id %}
+                <option value="{{c.id}}" selected>{{c.nomCat}}</option>
+                {% else %}
+                <option value="{{c.id}}">{{c.nomCat}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <br><input type="submit" value="Modifier" class="btn btn-success">
+        </div>
+    </form>
+</body>
+
+</html>

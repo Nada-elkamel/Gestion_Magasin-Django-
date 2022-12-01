@@ -1,0 +1,49 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Modification d'un utilisateur</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
+<body>
+    {% include "navBar.html" %}
+    <h1>
+        <center>Modifier un utilisateur</center>
+    </h1>
+    <form action="update_user_action/{{ user.id }}" method="post">
+        {% csrf_token %}
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>adresse Email</label>
+            <input name="email" type="email" value="{{ user.email }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>username </label>
+            <input name="username" type="text" value="{{ user.username }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>oldPassword </label>
+            <input type="password" name="oldPassword" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>newPassword</label>
+            <input type="password" name="newPassword" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>prenom </label>
+            <input name="first_name" type="text" value="{{ user.first_name }}" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <label>nom </label>
+            <input name="last_name" type="text" value="{{ user.last_name }}" class="form-control">
+        </div>
+
+        </div>
+        <div class="col-sm-4 col-md-6 col-lg-4">
+            <br><input type="submit" value="Modifier" class="btn btn-success">
+        </div>
+    </form>
+</body>
+
+</html>

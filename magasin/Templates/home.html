@@ -1,0 +1,64 @@
+<html>
+{% load static %}
+
+<head>
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
+<body>
+    <!--Navbar-->
+    
+   {% include "navBar.html" %}
+   
+   <!--Fin Navbar-->
+   <div class="container">
+      <div class="card mb-6">
+         <div class="card-body">
+
+            <h1>Liste des articles</h1>
+            <p align="right">
+               <a href="addArticle/" class="btn btn-primary">Ajouter un article</a>
+               </p>
+            <table class="table table-striped">
+               <thead>
+                  <tr>
+                     <th>ID</th>
+                     <th>Libelle</th>
+                     <th>Prix (DT)</th>
+                     <th>Quantité</th>
+                     <th>Date d'ajout</th>
+                     <th>Catégorie</th>
+                     <th>Approvisonner</t>
+                     <th>Modifier</th>
+                     <th>Supprimer</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for a in art reversed %}
+                  {% for c in cat reversed %}
+                  {% if c.id == a.categ_id %}
+                  <tr>
+                     <th>{{ a.id }}</th>
+                     <th>{{ a.libelle }}</th>
+                     <th>{{ a.prix }}</th>
+                     <th>{{ a.qte }}</th>
+                     <th>{{ a.dateAjout }}</th>
+                     <th>{{ c.nomCat }}</th>
+
+                     {% if a.qte < 5 %} <th>Oui</th>
+                        {% else %}
+                        <th>Non</th>
+                        {% endif %}
+                        </th>
+                        <th><a href="update_art/{{ a.id }}"><img height="32" width="32" src="{% static 'img/edit.png' %}"></a></th>
+                        <th><a href="del_art/{{a.id}}"><img height="32" width="32" src="{% static 'img/delete.jfif' %}"></a></th>
+                  </tr>
+                  {%endif%}
+                  {% endfor %}
+                  {% endfor %}
+               </tbody>
+            </table>
+</body>
+
+</html>
